@@ -107,12 +107,12 @@ window.Quarto = {
   <li><a href="#sec-clt-proof" id="toc-sec-clt-proof" class="nav-link" data-scroll-target="#sec-clt-proof">Доказательство</a>
   <ul class="collapse">
   <li><a href="#sec-swapping-idea" id="toc-sec-swapping-idea" class="nav-link" data-scroll-target="#sec-swapping-idea">Идея постепенной подмены слагаемых</a></li>
-  <li><a href="#выбираем-произвольное-эпсилон" id="toc-выбираем-произвольное-эпсилон" class="nav-link" data-scroll-target="#выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</a></li>
-  <li><a href="#анализ-первой-пары-полушагов" id="toc-анализ-первой-пары-полушагов" class="nav-link" data-scroll-target="#анализ-первой-пары-полушагов">Анализ первой пары полушагов</a></li>
-  <li><a href="#линеаризация-разницы-для-полушага" id="toc-линеаризация-разницы-для-полушага" class="nav-link" data-scroll-target="#линеаризация-разницы-для-полушага">Линеаризация разницы для полушага</a></li>
-  <li><a href="#два-случая-для-сложного-слагаемого" id="toc-два-случая-для-сложного-слагаемого" class="nav-link" data-scroll-target="#два-случая-для-сложного-слагаемого">Два случая для сложного слагаемого</a></li>
-  <li><a href="#взгляд-назад" id="toc-взгляд-назад" class="nav-link" data-scroll-target="#взгляд-назад">Взгляд назад</a></li>
-  <li><a href="#источники" id="toc-источники" class="nav-link" data-scroll-target="#источники">Источники</a></li>
+  <li><a href="#sec-choose-any-epsilon" id="toc-sec-choose-any-epsilon" class="nav-link" data-scroll-target="#sec-choose-any-epsilon">Выбираем произвольное эпсилон</a></li>
+  <li><a href="#sec-first-semisteps" id="toc-sec-first-semisteps" class="nav-link" data-scroll-target="#sec-first-semisteps">Анализ первой пары полушагов</a></li>
+  <li><a href="#sec-linearizing-difference" id="toc-sec-linearizing-difference" class="nav-link" data-scroll-target="#sec-linearizing-difference">Линеаризация разницы для полушага</a></li>
+  <li><a href="#sec-two-subcases" id="toc-sec-two-subcases" class="nav-link" data-scroll-target="#sec-two-subcases">Два случая для сложного слагаемого</a></li>
+  <li><a href="#sec-look-back" id="toc-sec-look-back" class="nav-link" data-scroll-target="#sec-look-back">Взгляд назад</a></li>
+  <li><a href="#sec-sources" id="toc-sec-sources" class="nav-link" data-scroll-target="#sec-sources">Источники</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Другие форматы</h2><ul><li><a href="clt_by_swapping.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -278,8 +278,8 @@ S_{5, 3} = X_1 + X_2 + 0 + Y_4 + Y_5,
 <p>Замечаем также, что <span class="math inline">\(Z_{n,0} = Y_1 + \ldots + Y_n \sim \mathcal{N}(0;1)\)</span>.</p>
 <p>В силу леммы нам достаточно доказать, что для любой бесконечно дифференцируемой <span class="math inline">\(h\)</span> с ограниченными производными <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}(h(Z_{n,n})) \to \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,0}))\)</span>.</p>
 </section>
-<section id="выбираем-произвольное-эпсилон" class="level2">
-<h2 class="anchored" data-anchor-id="выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</h2>
+<section id="sec-choose-any-epsilon" class="level2">
+<h2 class="anchored" data-anchor-id="sec-choose-any-epsilon">Выбираем произвольное эпсилон</h2>
 <p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> отличие этих двух ожиданий невелико, <span class="math display">\[
 \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,n})) - \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,0})) \in [-\varepsilon;+\varepsilon].
 \]</span></p>
@@ -290,8 +290,8 @@ h\left(\sum_{i=1}^n X_i\right)=h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,
 \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,i})) - \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,i-1}))
 \]</span> от <strong>каждого</strong> шага становится по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>, то дело будет в шляпе!</p>
 </section>
-<section id="анализ-первой-пары-полушагов" class="level2">
-<h2 class="anchored" data-anchor-id="анализ-первой-пары-полушагов">Анализ первой пары полушагов</h2>
+<section id="sec-first-semisteps" class="level2">
+<h2 class="anchored" data-anchor-id="sec-first-semisteps">Анализ первой пары полушагов</h2>
 <p>Остановимся на первой паре полушагов, <span class="math display">\[
 h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})
 \]</span> Доказательство для других пар полушагов полностью аналогично.</p>
@@ -302,8 +302,8 @@ h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarr
 <p>Проведем доказательство для разницы первого полушага, <span class="math inline">\(\left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right)\)</span>. Доказательство для разницы второго полушага, <span class="math inline">\(\left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right)\)</span>, аналогично.</p>
 <p>В этот момент можно уже не писать индекс <span class="math inline">\((n,n)\)</span> у <span class="math inline">\(Z\)</span> и <span class="math inline">\(S\)</span> :)</p>
 </section>
-<section id="линеаризация-разницы-для-полушага" class="level2">
-<h2 class="anchored" data-anchor-id="линеаризация-разницы-для-полушага">Линеаризация разницы для полушага</h2>
+<section id="sec-linearizing-difference" class="level2">
+<h2 class="anchored" data-anchor-id="sec-linearizing-difference">Линеаризация разницы для полушага</h2>
 <p>Выполним линеаризацию функции <span class="math inline">\(h(Z_{n,n})\)</span> в окрестности точки <span class="math inline">\(S_{n,n}\)</span>. Заметим предварительно, что эти точки отличаются ровно на <span class="math inline">\(X_n\)</span>, <span class="math inline">\(Z_{n,n} = S_{n,n} + X_n\)</span>. <span class="math display">\[
 h(Z_{n,n}) \approx h(S_{n,n}) + h'(S_{n,n})(Z_{n,n} - S_{n,n}) = h(S_{n,n}) + h'(S_{n,n}) X_n.
 \]</span> Для доказательства потребуется вспомнить точный смысл примерного равенства, а именно, остаток в форме Лагранжа. Найдётся такая точка <span class="math inline">\(C\)</span> между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, что <span class="math display">\[
@@ -317,8 +317,8 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 \mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) = 0 + \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2n}\right) + \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(C) - h''(S_{n,n})}{2}X_n^2\right).
 \]</span></p>
 </section>
-<section id="два-случая-для-сложного-слагаемого" class="level2">
-<h2 class="anchored" data-anchor-id="два-случая-для-сложного-слагаемого">Два случая для сложного слагаемого</h2>
+<section id="sec-two-subcases" class="level2">
+<h2 class="anchored" data-anchor-id="sec-two-subcases">Два случая для сложного слагаемого</h2>
 <p>Сосредоточимся на последнем слагаемом и рассмотрим два случая, в зависимости от того, больше ли <span class="math inline">\(\left\lvert X_n \right\rvert\)</span> чем <span class="math inline">\(\delta\)</span>. <span class="math display">\[
 \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2 = \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\left\lvert X_n \right\rvert \leq \delta)\right) + \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\left\lvert X_n \right\rvert &gt; \delta)\right).
 \]</span> Изучаем первое слагаемое. Вспомним, что точка <span class="math inline">\(C\)</span> находится между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, а <span class="math inline">\(S_{n,n} + X_n = Z_{n,n}\)</span>. Поэтому <span class="math inline">\(\left\lvert C - S_{n,n} \right\rvert \leq \delta\)</span>, если <span class="math inline">\(\left\lvert X_n \right\rvert\leq \delta\)</span>.</p>
@@ -337,8 +337,8 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 \mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) \in \left[ - \frac{\varepsilon}{n}; + \frac{\varepsilon}{n} \right].
 \]</span></p>
 </section>
-<section id="взгляд-назад" class="level2">
-<h2 class="anchored" data-anchor-id="взгляд-назад">Взгляд назад</h2>
+<section id="sec-look-back" class="level2">
+<h2 class="anchored" data-anchor-id="sec-look-back">Взгляд назад</h2>
 <p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Изменение <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h\)</span>, вызванное каждым шагом, состоит из разницы изменений вызванных полушагами. А изменение от каждого полушага при больших <span class="math inline">\(n\)</span> не отличается от общей константы более чем на <span class="math inline">\(\varepsilon/2n\)</span>. Поэтому каждый шаг даёт изменение не больше <span class="math inline">\(\varepsilon/n\)</span>, и вся разница <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,0})\)</span> начиная с некоторого момента меньше <span class="math inline">\(\varepsilon\)</span>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -376,14 +376,14 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </div>
 </div>
 </section>
-<section id="источники" class="level2">
-<h2 class="anchored" data-anchor-id="источники">Источники</h2>
+<section id="sec-sources" class="level2">
+<h2 class="anchored" data-anchor-id="sec-sources">Источники</h2>
 <p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">(<a href="#ref-Chin2022ASA" role="doc-biblioref">Chin 2022</a>)</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
 
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">использованная литература</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading"></h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Chin2022ASA" class="csl-entry" role="listitem">
 Chin, Calvin Wooyoung. 2022. <span>«A Short and Elementary Proof of the Central Limit Theorem by Individual Swapping»</span>. <em>The American Mathematical Monthly</em> 129: 374–80. <a href="https://arxiv.org/abs/2106.00871">https://arxiv.org/abs/2106.00871</a>.
 </div>
