@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.508">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>clt_by_swapping</title>
+<title>Доказательство ЦПТ последовательной подменой слагаемых</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-</style>
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="clt_by_swapping_files/libs/clipboard/clipboard.min.js"></script>
@@ -27,61 +52,133 @@ ul.task-list{list-style: none;}
 <link href="clt_by_swapping_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="clt_by_swapping_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="clt_by_swapping_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="clt_by_swapping_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="clt_by_swapping_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+</head><body>$$
+\newcommand{\cN}{\mathcal{N}}
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+$$
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-</head>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
-<body class="fullcontent">
+
+
+
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul class="collapse">
+  <li><a href="#sec-recall" id="toc-sec-recall" class="nav-link active" data-scroll-target="#sec-recall">Воспоминания</a></li>
+  <li><a href="#sec-clt-statement" id="toc-sec-clt-statement" class="nav-link" data-scroll-target="#sec-clt-statement">Формулировка цпт</a></li>
+  <li><a href="#sec-clt-proof" id="toc-sec-clt-proof" class="nav-link" data-scroll-target="#sec-clt-proof">Доказательство</a>
+  <ul class="collapse">
+  <li><a href="#sec-swapping-idea" id="toc-sec-swapping-idea" class="nav-link" data-scroll-target="#sec-swapping-idea">Идея постепенной подмены слагаемых</a></li>
+  <li><a href="#выбираем-произвольное-эпсилон" id="toc-выбираем-произвольное-эпсилон" class="nav-link" data-scroll-target="#выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</a></li>
+  <li><a href="#анализ-первой-пары-полушагов" id="toc-анализ-первой-пары-полушагов" class="nav-link" data-scroll-target="#анализ-первой-пары-полушагов">Анализ первой пары полушагов</a></li>
+  <li><a href="#линеаризация-разницы-для-полушага" id="toc-линеаризация-разницы-для-полушага" class="nav-link" data-scroll-target="#линеаризация-разницы-для-полушага">Линеаризация разницы для полушага</a></li>
+  <li><a href="#два-случая-для-сложного-слагаемого" id="toc-два-случая-для-сложного-слагаемого" class="nav-link" data-scroll-target="#два-случая-для-сложного-слагаемого">Два случая для сложного слагаемого</a></li>
+  <li><a href="#взгляд-назад" id="toc-взгляд-назад" class="nav-link" data-scroll-target="#взгляд-назад">Взгляд назад</a></li>
+  <li><a href="#источники" id="toc-источники" class="nav-link" data-scroll-target="#источники">Источники</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Другие форматы</h2><ul><li><a href="clt_by_swapping.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Доказательство ЦПТ последовательной подменой слагаемых</h1>
+</div>
 
 
-<p>Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. Эти заметки посвещены доказательству ЦПТ без использования характеристических функций.</p>
+<section id="sec-recall" class="level1">
+<h1>Воспоминания</h1>
+<p>Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Сходимость по распределению
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходится к <span class="math inline">\(R\)</span> по распределению, если</p>
-<p><span class="math display">\[
+<p>Последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходится к <span class="math inline">\(R\)</span> по распределению, если <span class="math display">\[
 \lim_{n\to\infty} \P(R_n \leq x) = \P(R\leq x) = F(x)
-\]</span></p>
-<p>в любой точке <span class="math inline">\(x\)</span>, где функция распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> непрерывна.</p>
+\]</span> в любой точке <span class="math inline">\(x\)</span>, где функция распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> непрерывна.</p>
 </div>
 </div>
 <p>Перед доказательством ЦПТ нам потребуется лемма. Эта лемма позволяет от пределов вероятностей перейти к изучению пределов ожиданий гладких функций. Казалось бы, вероятности проще, чем ожидания, да ещё каких-то ненаписанных явно гладких функций! Однако для гладких функций применима мощнейшая идея разложения в ряд Тейлора.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Лемма
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Для того, чтобы последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходилась к <span class="math inline">\(R\)</span> по распределению достаточно того, что для любой бесконечно дифференцируемой функций <span class="math inline">\(h\)</span> с ограниченными производными выполнено условие</p>
-<p><span class="math display">\[
+<p>Для того, чтобы последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходилась к <span class="math inline">\(R\)</span> по распределению достаточно того, что для любой бесконечно дифференцируемой функций <span class="math inline">\(h\)</span> с ограниченными производными выполнено условие <span class="math display">\[
 \lim_{n\to\infty} \E(h(R_n)) = \E(h(R)).
 \]</span></p>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Доказательство леммы
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -91,49 +188,37 @@ ul.task-list{list-style: none;}
 <p>Нам надо доказать, что при большом <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n\leq x)\)</span> не может слишком сильно отличаться от вероятности <span class="math inline">\(\P(R \leq x)\)</span> ни в большую, ни в меньшую сторону.</p>
 <p>Докажем половину утверждения, вторая половина доказывается по аналогии. Основная идея доказательства такова: вероятность <span class="math inline">\(\P(R_n \leq x)\)</span> можно заменить на ожидание <span class="math inline">\(\E(I(R_n \leq x))\)</span>, а «ступенчатый» индикатор <span class="math inline">\(I\)</span> можно сколь угодно точно приблизить гладкой много раз дифференцируемой функцией.</p>
 <p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n \leq x) &gt; \P(R \leq x) - \varepsilon\)</span>.</p>
-<p>С помощью ожидания индикатора и функции распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> наша цель записывается так:</p>
-<p><span class="math display">\[
+<p>С помощью ожидания индикатора и функции распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> наша цель записывается так: <span class="math display">\[
 \E(I(R_n \leq x)) &gt; F(x) - \varepsilon.
 \]</span></p>
 <p>Отступим от точки <span class="math inline">\(x\)</span> чуть-чуть влево, в точку <span class="math inline">\(x - \delta\)</span>. В силу непрерывности <span class="math inline">\(F\)</span> в точке <span class="math inline">\(x\)</span> размер оступа <span class="math inline">\(\delta\)</span> можно выбрать так, что <span class="math inline">\(F(x-\delta) &gt; F(x) - \varepsilon/2\)</span>.</p>
-<p>Теперь придумаем гладкую функцию <span class="math inline">\(h\)</span>, которая чуть-чуть занижает индикатор <span class="math inline">\(I(R_n \leq x)\)</span>. А именно, левее <span class="math inline">\(x-\delta\)</span> функция <span class="math inline">\(h\)</span> равна 1, правее <span class="math inline">\(x\)</span> функция <span class="math inline">\(h\)</span> равна нулю, а на отрезке <span class="math inline">\([x-\delta, x]\)</span> функция <span class="math inline">\(h\)</span> плавно спускается от 1 к 0. По построению,</p>
-<p><span class="math display">\[
+<p>Теперь придумаем гладкую функцию <span class="math inline">\(h\)</span>, которая чуть-чуть занижает индикатор <span class="math inline">\(I(R_n \leq x)\)</span>. А именно, левее <span class="math inline">\(x-\delta\)</span> функция <span class="math inline">\(h\)</span> равна 1, правее <span class="math inline">\(x\)</span> функция <span class="math inline">\(h\)</span> равна нулю, а на отрезке <span class="math inline">\([x-\delta, x]\)</span> функция <span class="math inline">\(h\)</span> плавно спускается от 1 к 0. По построению, <span class="math display">\[
 I(R_n \leq x - \delta) \leq h(R_n) \leq I(R_n \leq x).
-\]</span></p>
-<p>Делаем первый шаг по замене индикатора на не превосходящую его гладкую функцию <span class="math inline">\(h\)</span>:</p>
-<p><span class="math display">\[
+\]</span> Делаем первый шаг по замене индикатора на не превосходящую его гладкую функцию <span class="math inline">\(h\)</span>: <span class="math display">\[
 \P(R_n\leq x) = \E(I(R_n \leq x)) \geq \E(h(R_n)).
-\]</span></p>
-<p>Теперь выберем <span class="math inline">\(n\)</span> достаточно большим, так, чтобы</p>
-<p><span class="math display">\[
+\]</span> Теперь выберем <span class="math inline">\(n\)</span> достаточно большим, так, чтобы <span class="math display">\[
 \E(h(R_n)) \geq \E(h(R)) - \varepsilon/2.
-\]</span></p>
-<p>Теперь заменяем гладкую функцию <span class="math inline">\(h\)</span> на не превосходящий её индикатор,</p>
-<p><span class="math display">\[
+\]</span> Теперь заменяем гладкую функцию <span class="math inline">\(h\)</span> на не превосходящий её индикатор, <span class="math display">\[
 \E(h(R)) - \varepsilon/2 \geq \E(I(R \leq x-\delta)) - \varepsilon/2 = F(x-\delta) - \varepsilon/2.
-\]</span></p>
-<p>Вспоминаем, что точку <span class="math inline">\(x-\delta\)</span> мы выбрали недалеко от <span class="math inline">\(x\)</span> и получаем в итоге, что начиная с некоторого <span class="math inline">\(n\)</span></p>
-<p><span class="math display">\[
+\]</span> Вспоминаем, что точку <span class="math inline">\(x-\delta\)</span> мы выбрали недалеко от <span class="math inline">\(x\)</span> и получаем в итоге, что начиная с некоторого <span class="math inline">\(n\)</span> <span class="math display">\[
 \P(X_n \leq x) \geq F(x) - \varepsilon.
-\]</span></p>
-<p>Аналогично доказывается и вторая половина. На этот раз надо отступать от <span class="math inline">\(x\)</span> вправо в точку <span class="math inline">\(x+\delta\)</span>, и заменять индикатор <span class="math inline">\(I(R_n \leq x)\)</span> мажорирующей его гладкой функцией <span class="math inline">\(h\)</span>.</p>
+\]</span> Аналогично доказывается и вторая половина. На этот раз надо отступать от <span class="math inline">\(x\)</span> вправо в точку <span class="math inline">\(x+\delta\)</span>, и заменять индикатор <span class="math inline">\(I(R_n \leq x)\)</span> мажорирующей его гладкой функцией <span class="math inline">\(h\)</span>.</p>
 </div>
 </div>
 </div>
 <p>По доказательству видно, что лемма остается верна, если расширить класс функций до просто непрерывных или до трижды дифференцируемых с конечными производными.</p>
-<p>При желании можно сконструировать используемую в доказательстве функцию <span class="math inline">\(h\)</span> явно, например, на базе бесконечно плавно стартующей из нуля функции</p>
-<p><span class="math display">\[
+<p>При желании можно сконструировать используемую в доказательстве функцию <span class="math inline">\(h\)</span> явно, например, на базе бесконечно плавно стартующей из нуля функции <span class="math display">\[
 g(t) = \begin{cases}
 \exp(1/t) \text{ при } t&gt;0, \\
 0, \text{ при } t\leq 0.
 \end{cases}
 \]</span></p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Упражнение к лемме
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -147,85 +232,70 @@ g(t) = \begin{cases}
 </div>
 </div>
 </div>
-<section id="формулировка-цпт" class="level1">
+</section>
+<section id="sec-clt-statement" class="level1">
 <h1>Формулировка цпт</h1>
 <p>Вспомним одну из формулировок ЦПТ.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Центральная предельная теорема
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Если величины <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_2\)</span>, , независимы и одинаково распределены с конечным ожиданием <span class="math inline">\(\mu\)</span> и дисперсией <span class="math inline">\(\sigma^2\)</span>, то отмасштабированная сумма</p>
-<p><span class="math display">\[
+<p>Если величины <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_2\)</span>, , независимы и одинаково распределены с конечным ожиданием <span class="math inline">\(\mu\)</span> и дисперсией <span class="math inline">\(\sigma^2\)</span>, то отмасштабированная сумма <span class="math display">\[
 Z_n = \frac{\sum_{i=1}^n Q_i - \E(\sum_{i=1}^n Q_i)}{\sqrt{\Var(\sum_{i=1}^n Q_i)}}
-\]</span></p>
-<p>стремится по распределению к <span class="math inline">\(\cN(0;1)\)</span>.</p>
+\]</span> стремится по распределению к <span class="math inline">\(\cN(0;1)\)</span>.</p>
 </div>
 </div>
 </section>
-<section id="доказательство" class="level1">
+<section id="sec-clt-proof" class="level1">
 <h1>Доказательство</h1>
-<p>Для начала представим <span class="math inline">\(S_n\)</span> в виде отмасштабированных слагаемых.</p>
-<p><span class="math display">\[
+<p>Для начала представим <span class="math inline">\(S_n\)</span> в виде отмасштабированных слагаемых. <span class="math display">\[
 Z_n = \frac{Q_1 - \mu}{\sigma \sqrt n} + \ldots + \frac{Q_{n-1} - \mu}{\sigma \sqrt n} + \frac{Q_n - \mu}{\sigma \sqrt n} = X_1 + \ldots + X_{n-1} + X_n
-\]</span></p>
-<p>Замечаем, что <span class="math inline">\(\E(X_i) = 0\)</span>, <span class="math inline">\(\Var(X_i) = 1/n\)</span>.</p>
-<section id="идея-постепенной-подмены-слагаемых" class="level2">
-<h2 class="anchored" data-anchor-id="идея-постепенной-подмены-слагаемых">Идея постепенной подмены слагаемых</h2>
+\]</span> Замечаем, что <span class="math inline">\(\E(X_i) = 0\)</span>, <span class="math inline">\(\Var(X_i) = 1/n\)</span>.</p>
+<section id="sec-swapping-idea" class="level2">
+<h2 class="anchored" data-anchor-id="sec-swapping-idea">Идея постепенной подмены слагаемых</h2>
 <p>Теперь потихоньку начнем менять слагаемые в правом хвосте на независимые слагаемые <span class="math inline">\(Y_i\)</span> с таким же нулевым ожиданием, такой же дисперсией <span class="math inline">\(1/n\)</span>, но нормально распределенные:</p>
 <p>Удалим <span class="math inline">\(X_n\)</span>, добавим <span class="math inline">\(Y_n\)</span>, удалим <span class="math inline">\(X_{n-1}\)</span>, добавим <span class="math inline">\(Y_{n-1}\)</span>, и так далее…</p>
 <p>Промежуточную сумму до удаления очередного <span class="math inline">\(X_i\)</span> обозначим с помощью <span class="math inline">\(Z_{n,i}\)</span>, а после удаления очередного <span class="math inline">\(X_i\)</span> — с помощью <span class="math inline">\(S_{n,i}\)</span>.</p>
-<p>Для трёх величин схема выглядит так:</p>
-<p><span class="math display">\[
+<p>Для трёх величин схема выглядит так: <span class="math display">\[
 X_1 + X_2 + X_3 = Z_{3,3} \overset{-X_3}{\longrightarrow}S_{3,3}\overset{+Y_3}{\longrightarrow}Z_{3,2}\overset{-X_2}{\longrightarrow}S_{3,2}\overset{+Y_2}{\longrightarrow}Z_{3,1}\overset{-X_1}{\longrightarrow}S_{3,1}\overset{+Y_1}{\longrightarrow}Z_{3,0}=Y_1 + Y_2 + Y_3
 \]</span></p>
 <p>Величина <span class="math inline">\(Z_{n,i}\)</span> будет своими первыми <span class="math inline">\(i\)</span> слагаемыми содержать иксы, а оставшимися слагаемыми — игреки. В сумме <span class="math inline">\(S_{n,i}\)</span> полностью отсутствует <span class="math inline">\(i\)</span>-е слагаемое, слагаемые с меньшими номерами — это <span class="math inline">\(X_1\)</span>, , <span class="math inline">\(X_{i-1}\)</span>, слагаемые с большими номерами — это <span class="math inline">\(Y_{i+1}\)</span>, , <span class="math inline">\(Y_n\)</span>.</p>
-<p>Для наглядного примера,</p>
-<p><span class="math display">\[
+<p>Для наглядного примера, <span class="math display">\[
 Z_{5, 3} = X_1 + X_2 + X_3 + Y_4 + Y_5,
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 S_{5, 3} = X_1 + X_2 + 0 + Y_4 + Y_5,
 \]</span></p>
-<p>В общем виде схема выглядит так:</p>
-<p><span class="math display">\[
+<p>В общем виде схема выглядит так: <span class="math display">\[
 \sum_{i=1}^n X_i = Z_{n,n} \overset{-X_n}{\longrightarrow}S_{n,n}\overset{+Y_n}{\longrightarrow}Z_{n,n-1}\overset{-X_{n-1}}{\longrightarrow} \ldots \overset{-X_2}{\longrightarrow}S_{n,2}\overset{+Y_2}{\longrightarrow}Z_{n,1}\overset{-X_1}{\longrightarrow}S_{n,1}\overset{+Y_1}{\longrightarrow}Z_{n,0}=\sum_{i=1}^n Y_i
-\]</span></p>
-<p>В схеме <span class="math inline">\(n\)</span> шагов, каждый из которых состоит из двух полушагов, удаления <span class="math inline">\(X_i\)</span> и добавления <span class="math inline">\(Y_i\)</span>.</p>
+\]</span> В схеме <span class="math inline">\(n\)</span> шагов, каждый из которых состоит из двух полушагов, удаления <span class="math inline">\(X_i\)</span> и добавления <span class="math inline">\(Y_i\)</span>.</p>
 <p>Заметим, что <span class="math inline">\(S_{n,i}\)</span> не зависит ни от <span class="math inline">\(X_i\)</span>, ни от <span class="math inline">\(Y_i\)</span>. Это пригодится.</p>
 <p>Замечаем также, что <span class="math inline">\(Z_{n,0} = Y_1 + \ldots + Y_n \sim \cN(0;1)\)</span>.</p>
 <p>В силу леммы нам достаточно доказать, что для любой бесконечно дифференцируемой <span class="math inline">\(h\)</span> с ограниченными производными <span class="math inline">\(\E(h(Z_{n,n})) \to \E(h(Z_{n,0}))\)</span>.</p>
 </section>
 <section id="выбираем-произвольное-эпсилон" class="level2">
 <h2 class="anchored" data-anchor-id="выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</h2>
-<p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> отличие этих двух ожиданий невелико,</p>
-<p><span class="math display">\[
+<p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> отличие этих двух ожиданий невелико, <span class="math display">\[
 \E(h(Z_{n,n})) - \E(h(Z_{n,0})) \in [-\varepsilon;+\varepsilon].
 \]</span></p>
-<p>Посмотрим на нашу схему подмен</p>
-<p><span class="math display">\[
+<p>Посмотрим на нашу схему подмен <span class="math display">\[
 h\left(\sum_{i=1}^n X_i\right)=h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})\overset{-X_{n-1}}{\longrightarrow} \ldots \overset{+Y_2}{\longrightarrow}h(Z_{n,1})\overset{-X_1}{\longrightarrow}h(S_{n,1})\overset{+Y_1}{\longrightarrow}h(Z_{n,0})=h\left(\sum_{i=1}^n Y_i\right)
 \]</span></p>
-<p>С ростом <span class="math inline">\(n\)</span> цепочка растет, а каждый шаг по идее должен становится всё меньше. Если мы докажем, что начиная с некоторого <span class="math inline">\(n\)</span> разница</p>
-<p><span class="math display">\[
+<p>С ростом <span class="math inline">\(n\)</span> цепочка растет, а каждый шаг по идее должен становится всё меньше. Если мы докажем, что начиная с некоторого <span class="math inline">\(n\)</span> разница <span class="math display">\[
 \E(h(Z_{n,i})) - \E(h(Z_{n,i-1}))
-\]</span></p>
-<p>от <strong>каждого</strong> шага становится по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>, то дело будет в шляпе!</p>
+\]</span> от <strong>каждого</strong> шага становится по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>, то дело будет в шляпе!</p>
 </section>
 <section id="анализ-первой-пары-полушагов" class="level2">
 <h2 class="anchored" data-anchor-id="анализ-первой-пары-полушагов">Анализ первой пары полушагов</h2>
-<p>Остановимся на первой паре полушагов,</p>
-<p><span class="math display">\[
+<p>Остановимся на первой паре полушагов, <span class="math display">\[
 h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})
-\]</span></p>
-<p>Доказательство для других пар полушагов полностью аналогично.</p>
-<p>Наша разница <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,n-1})\)</span> разбивается в два полушага,</p>
-<p><span class="math display">\[
+\]</span> Доказательство для других пар полушагов полностью аналогично.</p>
+<p>Наша разница <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,n-1})\)</span> разбивается в два полушага, <span class="math display">\[
 \E h(Z_{n,n}) - \E h(Z_{n,n-1}) = \left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right) - \left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right).
 \]</span></p>
 <p>Заглянем в будущее, чтобы осознать план действий. Оказывается, что обе полушаговых разницы, <span class="math inline">\(\left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right)\)</span> и <span class="math inline">\(\left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right)\)</span>, очень похожи на некоторую общую величину. Эта величина окажется равной <span class="math inline">\(\E\left(\frac{h''(S_{n,n})}{2n}\right)\)</span>, но это не важно. Важно, что начиная с некоторого <span class="math inline">\(n\)</span> отличие каждой полушаговой разницы от этой общей величины будет меньше <span class="math inline">\(\varepsilon/2n\)</span>. При вычитании двух разниц общая величина уничтожится, и разница для целого шага окажется по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>.</p>
@@ -234,65 +304,48 @@ h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarr
 </section>
 <section id="линеаризация-разницы-для-полушага" class="level2">
 <h2 class="anchored" data-anchor-id="линеаризация-разницы-для-полушага">Линеаризация разницы для полушага</h2>
-<p>Выполним линеаризацию функции <span class="math inline">\(h(Z_{n,n})\)</span> в окрестности точки <span class="math inline">\(S_{n,n}\)</span>. Заметим предварительно, что эти точки отличаются ровно на <span class="math inline">\(X_n\)</span>, <span class="math inline">\(Z_{n,n} = S_{n,n} + X_n\)</span>.</p>
-<p><span class="math display">\[
+<p>Выполним линеаризацию функции <span class="math inline">\(h(Z_{n,n})\)</span> в окрестности точки <span class="math inline">\(S_{n,n}\)</span>. Заметим предварительно, что эти точки отличаются ровно на <span class="math inline">\(X_n\)</span>, <span class="math inline">\(Z_{n,n} = S_{n,n} + X_n\)</span>. <span class="math display">\[
 h(Z_{n,n}) \approx h(S_{n,n}) + h'(S_{n,n})(Z_{n,n} - S_{n,n}) = h(S_{n,n}) + h'(S_{n,n}) X_n.
-\]</span></p>
-<p>Для доказательства потребуется вспомнить точный смысл примерного равенства, а именно, остаток в форме Лагранжа. Найдётся такая точка <span class="math inline">\(C\)</span> между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, что</p>
-<p><span class="math display">\[
+\]</span> Для доказательства потребуется вспомнить точный смысл примерного равенства, а именно, остаток в форме Лагранжа. Найдётся такая точка <span class="math inline">\(C\)</span> между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, что <span class="math display">\[
 h(Z_{n,n}) = h(S_{n,n}) + h'(S_{n,n})X_n + \frac{h''(C)}{2!}X_n^2.
-\]</span></p>
-<p>Выделяем нужную нам разницу,</p>
-<p><span class="math display">\[
+\]</span> Выделяем нужную нам разницу, <span class="math display">\[
 h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(C)}{2!}X_n^2.
-\]</span></p>
-<p>Прибавим и вычтем справа в числителе <span class="math inline">\(h''(S_{n,n})\)</span>,</p>
-<p><span class="math display">\[
+\]</span> Прибавим и вычтем справа в числителе <span class="math inline">\(h''(S_{n,n})\)</span>, <span class="math display">\[
 h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2.
 \]</span></p>
-<p>Берём математическое ожидание, вспомнив, что <span class="math inline">\(\E(X_n) =0\)</span>, <span class="math inline">\(\Var(X_n)= 1/n\)</span>, а <span class="math inline">\(X_n\)</span> не зависит от <span class="math inline">\(S_n\)</span>,</p>
-<p><span class="math display">\[
+<p>Берём математическое ожидание, вспомнив, что <span class="math inline">\(\E(X_n) =0\)</span>, <span class="math inline">\(\Var(X_n)= 1/n\)</span>, а <span class="math inline">\(X_n\)</span> не зависит от <span class="math inline">\(S_n\)</span>, <span class="math display">\[
 \E h(Z_{n,n}) - \E h(S_{n,n}) = 0 + \E\left(\frac{h''(S_{n,n})}{2n}\right) + \E\left(\frac{h''(C) - h''(S_{n,n})}{2}X_n^2\right).
 \]</span></p>
 </section>
 <section id="два-случая-для-сложного-слагаемого" class="level2">
 <h2 class="anchored" data-anchor-id="два-случая-для-сложного-слагаемого">Два случая для сложного слагаемого</h2>
-<p>Сосредоточимся на последнем слагаемом и рассмотрим два случая, в зависимости от того, больше ли <span class="math inline">\(\abs{X_n}\)</span> чем <span class="math inline">\(\delta\)</span>.</p>
-<p><span class="math display">\[
+<p>Сосредоточимся на последнем слагаемом и рассмотрим два случая, в зависимости от того, больше ли <span class="math inline">\(\abs{X_n}\)</span> чем <span class="math inline">\(\delta\)</span>. <span class="math display">\[
 \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2 = \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} \leq \delta)\right) + \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} &gt; \delta)\right).
-\]</span></p>
-<p>Изучаем первое слагаемое. Вспомним, что точка <span class="math inline">\(C\)</span> находится между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, а <span class="math inline">\(S_{n,n} + X_n = Z_{n,n}\)</span>. Поэтому <span class="math inline">\(\abs{C - S_{n,n}} \leq \delta\)</span>, если <span class="math inline">\(\abs{X_n}\leq \delta\)</span>.</p>
+\]</span> Изучаем первое слагаемое. Вспомним, что точка <span class="math inline">\(C\)</span> находится между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, а <span class="math inline">\(S_{n,n} + X_n = Z_{n,n}\)</span>. Поэтому <span class="math inline">\(\abs{C - S_{n,n}} \leq \delta\)</span>, если <span class="math inline">\(\abs{X_n}\leq \delta\)</span>.</p>
 <p>У функции <span class="math inline">\(h\)</span> ограничена третья производная, выберем <span class="math inline">\(\delta\)</span> настолько маленьким, чтобы зажать разницу <span class="math inline">\(h''(C) - h''(S_{n,n})\)</span> до величины меньшей <span class="math inline">\(\varepsilon/2\)</span>.</p>
-<p>Получаем ограничение для первого слагаемого,</p>
-<p><span class="math display">\[
+<p>Получаем ограничение для первого слагаемого, <span class="math display">\[
 \E\abs{\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} \leq \delta)} \leq E\left(\frac{\varepsilon}{4}X_n^2\right)=\frac{\varepsilon}{4n}
-\]</span></p>
-<p>Изучаем второе слагаемое. У функции <span class="math inline">\(h\)</span> ограничена вторая производная константой <span class="math inline">\(M\)</span>.</p>
+\]</span> Изучаем второе слагаемое. У функции <span class="math inline">\(h\)</span> ограничена вторая производная константой <span class="math inline">\(M\)</span>.</p>
 <p><span class="math display">\[
 \E\abs{\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} &gt; \delta)} \leq E\left(\frac{M + M}{4}X_n^2I(\abs{X_n} &gt; \delta)\right)=\frac{M}{2n}\E(X_n^2I(\abs{X_n} &gt; \delta))
 \]</span></p>
-<p>Подберем <span class="math inline">\(n\)</span> настолько большим, что <span class="math inline">\(\E(X_n^2 I(\abs{X_n} &gt; \delta)) &lt; \varepsilon/2M\)</span>. При этом второе слагаемое будет также ограничено величиной <span class="math inline">\(\varepsilon/4n\)</span>. Тем самым мы доказали, что начиная с некоторого <span class="math inline">\(n\)</span></p>
-<p><span class="math display">\[
+<p>Подберем <span class="math inline">\(n\)</span> настолько большим, что <span class="math inline">\(\E(X_n^2 I(\abs{X_n} &gt; \delta)) &lt; \varepsilon/2M\)</span>. При этом второе слагаемое будет также ограничено величиной <span class="math inline">\(\varepsilon/4n\)</span>. Тем самым мы доказали, что начиная с некоторого <span class="math inline">\(n\)</span> <span class="math display">\[
 \E\abs{\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2 } \leq \frac{\varepsilon}{4n} + \frac{\varepsilon}{4n} = \frac{\varepsilon}{2n}
-\]</span></p>
-<p>То есть,</p>
-<p><span class="math display">\[
+\]</span> То есть, <span class="math display">\[
 \E h(Z_{n,n}) - \E h(S_{n,n}) \in \left[ \E\left(\frac{h''(S_{n,n})}{2n}\right) - \frac{\varepsilon}{2n}; \E\left(\frac{h''(S_{n,n})}{2n}\right) + \frac{\varepsilon}{2n} \right].
-\]</span></p>
-<p>В этот же диапазон попадает и величина <span class="math inline">\(\E h(Z_{n,n-1}) - \E h(S_{n,n})\)</span>, поэтому</p>
-<p><span class="math display">\[
+\]</span> В этот же диапазон попадает и величина <span class="math inline">\(\E h(Z_{n,n-1}) - \E h(S_{n,n})\)</span>, поэтому <span class="math display">\[
 \E h(Z_{n,n}) - \E h(Z_{n,n-1}) \in \left[ - \frac{\varepsilon}{n}; + \frac{\varepsilon}{n} \right].
 \]</span></p>
 </section>
 <section id="взгляд-назад" class="level2">
 <h2 class="anchored" data-anchor-id="взгляд-назад">Взгляд назад</h2>
 <p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(\E h(Z_{n,n}) - \E h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Изменение <span class="math inline">\(\E h\)</span>, вызванное каждым шагом, состоит из разницы изменений вызванных полушагами. А изменение от каждого полушага при больших <span class="math inline">\(n\)</span> не отличается от общей константы более чем на <span class="math inline">\(\varepsilon/2n\)</span>. Поэтому каждый шаг даёт изменение не больше <span class="math inline">\(\varepsilon/n\)</span>, и вся разница <span class="math inline">\(\E h(Z_{n,n}) - \E h(Z_{n,0})\)</span> начиная с некоторого момента меньше <span class="math inline">\(\varepsilon\)</span>.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Упражнение к теореме
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -306,12 +359,12 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </div>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Решение упражнения к теореме
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -325,14 +378,37 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 </section>
 <section id="источники" class="level2">
 <h2 class="anchored" data-anchor-id="источники">Источники</h2>
-<p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">[@Chin2022ASA]</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
+<p>В основном изложение следует статье <span class="citation" data-cites="Chin2022ASA">(<a href="#ref-Chin2022ASA" role="doc-biblioref">Chin 2022</a>)</span>. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения.</p>
+
 </section>
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">использованная литература</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Chin2022ASA" class="csl-entry" role="listitem">
+Chin, Calvin Wooyoung. 2022. <span>«A Short and Elementary Proof of the Central Limit Theorem by Individual Swapping»</span>. <em>The American Mathematical Monthly</em> 129: 374–80. <a href="https://arxiv.org/abs/2106.00871">https://arxiv.org/abs/2106.00871</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -340,9 +416,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -353,18 +443,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -374,43 +498,308 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

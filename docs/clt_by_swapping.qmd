@@ -6,6 +6,16 @@ format:
   html:
     toc: true
     toc-depth: 2
+    include-in-header:
+      text: |
+        $$
+        \newcommand{\cN}{\mathcal{N}}
+        \DeclareMathOperator{\P}{\mathbb{P}}
+        \DeclareMathOperator{\E}{\mathbb{E}}
+        \DeclareMathOperator{\Var}{Var}
+        \DeclareMathOperator{\Cov}{Cov}
+        \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+        $$
   pdf:
     toc: true
     toc-depth: 2
@@ -13,7 +23,35 @@ format:
     colorlinks: true
     keep-tex: true
     include-in-header: 
-      - additional-header.tex
+      text: |
+        \usepackage{mathtools}
+        \newcommand{\cN}{\mathcal{N}}
+
+        \let\P\relax
+        \DeclareMathOperator{\P}{\mathbb{P}}
+        \DeclareMathOperator{\E}{\mathbb{E}}
+        \DeclareMathOperator{\plim}{plim}
+        \DeclareMathOperator{\Var}{Var}
+        \DeclareMathOperator{\Cov}{Cov}
+        \DeclareMathOperator{\Corr}{Corr}
+        
+        \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+        \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+        % TODO: automatic scaling does not work in pdf???
+        
+        % TODO: no cyrillic font in section titles!
+        \setmainfont{Linux Libertine}
+        
+        %\newfontfamily{\cyrillicfont}{Linux Libertine}
+        %\newfontfamily{\cyrillicfonttt}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontsf}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontrm}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontbf}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontmd}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontit}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontsl}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontsc}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontup}{Linux Libertine}
 bibliography: references.bib
 editor_options: 
   chunk_output_type: console
@@ -22,11 +60,17 @@ editor_options:
 ---
 
 
-Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению. 
+
+Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. 
+Эти заметки посвещены доказательству ЦПТ без использования характеристических функций.
+
+# Воспоминания {#sec-recall}
+
+
+Для аккуратной формулировки и доказательства вспомним сначала определение сходимости по распределению. 
 
 :::{.callout-note}
-## Сходимость по распределению
-
+## Сходимость по распределению {#def-convergence}
 Последовательность случайных величин $(R_n)$ сходится к $R$ по распределению, если 
 $$
 \lim_{n\to\infty} \P(R_n \leq x) = \P(R\leq x) = F(x)
@@ -105,12 +149,12 @@ $$
 
 :::
 
-# Формулировка цпт
+# Формулировка цпт {#sec-clt-statement}
 
 Вспомним одну из формулировок ЦПТ.
 
 :::{.callout-note}
-## Центральная предельная теорема
+## Центральная предельная теорема {#thm-clt}
 
 Если величины $Q_1$, $Q_2$, \ldots, независимы и одинаково распределены с конечным ожиданием $\mu$ и дисперсией $\sigma^2$, то отмасштабированная сумма
 $$
@@ -120,7 +164,7 @@ $$
 :::
 
 
-# Доказательство
+# Доказательство {#sec-clt-proof}
 
 Для начала представим $S_n$ в виде отмасштабированных слагаемых. 
 $$
@@ -128,7 +172,7 @@ Z_n = \frac{Q_1 - \mu}{\sigma \sqrt n} + \ldots + \frac{Q_{n-1} - \mu}{\sigma \s
 $$
 Замечаем, что $\E(X_i) = 0$, $\Var(X_i) = 1/n$.
 
-## Идея постепенной подмены слагаемых
+## Идея постепенной подмены слагаемых {#sec-swapping-idea}
 
 Теперь потихоньку начнем менять слагаемые в правом хвосте на независимые слагаемые $Y_i$ с таким же нулевым ожиданием, такой же дисперсией $1/n$, но нормально распределенные:
 
@@ -225,6 +269,7 @@ $$
 $$
 \E h(Z_{n,n}) - \E h(S_{n,n}) = 0 + \E\left(\frac{h''(S_{n,n})}{2n}\right) + \E\left(\frac{h''(C) - h''(S_{n,n})}{2}X_n^2\right).
 $$
+
 ## Два случая для сложного слагаемого
 
 Сосредоточимся на последнем слагаемом и рассмотрим два случая, в зависимости от того, больше ли $\abs{X_n}$ чем $\delta$.
@@ -285,5 +330,7 @@ $$
 
 ## Источники
 
-В основном изложение следует статье [@Chin2022ASA]. Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения. 
+В основном изложение следует статье [@Chin2022ASA]. 
+Постарался сделать изложение более «мотивированным», чтобы перед шагами яснее была видна цель. Также излагаю один случай из повторяющихся. 
+С одной стороны, это облегчает понимание, с другой стороны аналогичный случай можно решать в виде упражнения. 
 
