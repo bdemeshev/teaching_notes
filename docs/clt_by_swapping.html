@@ -153,7 +153,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>Последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходится к <span class="math inline">\(R\)</span> по распределению, если <span class="math display">\[
-\lim_{n\to\infty} \P(R_n \leq x) = \P(R\leq x) = F(x)
+\lim_{n\to\infty} \mathop{\mathrm{\mathbb{P}}}(R_n \leq x) = \mathop{\mathrm{\mathbb{P}}}(R\leq x) = F(x)
 \]</span> в любой точке <span class="math inline">\(x\)</span>, где функция распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> непрерывна.</p>
 </div>
 </div>
@@ -169,7 +169,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>Для того, чтобы последовательность случайных величин <span class="math inline">\((R_n)\)</span> сходилась к <span class="math inline">\(R\)</span> по распределению достаточно того, что для любой бесконечно дифференцируемой функций <span class="math inline">\(h\)</span> с ограниченными производными выполнено условие <span class="math display">\[
-\lim_{n\to\infty} \E(h(R_n)) = \E(h(R)).
+\lim_{n\to\infty} \mathop{\mathrm{\mathbb{E}}}(h(R_n)) = \mathop{\mathrm{\mathbb{E}}}(h(R)).
 \]</span></p>
 </div>
 </div>
@@ -185,23 +185,23 @@ window.Quarto = {
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Нам надо доказать, что при большом <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n\leq x)\)</span> не может слишком сильно отличаться от вероятности <span class="math inline">\(\P(R \leq x)\)</span> ни в большую, ни в меньшую сторону.</p>
-<p>Докажем половину утверждения, вторая половина доказывается по аналогии. Основная идея доказательства такова: вероятность <span class="math inline">\(\P(R_n \leq x)\)</span> можно заменить на ожидание <span class="math inline">\(\E(I(R_n \leq x))\)</span>, а «ступенчатый» индикатор <span class="math inline">\(I\)</span> можно сколь угодно точно приблизить гладкой много раз дифференцируемой функцией.</p>
-<p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\P(R_n \leq x) &gt; \P(R \leq x) - \varepsilon\)</span>.</p>
+<p>Нам надо доказать, что при большом <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\mathop{\mathrm{\mathbb{P}}}(R_n\leq x)\)</span> не может слишком сильно отличаться от вероятности <span class="math inline">\(\mathop{\mathrm{\mathbb{P}}}(R \leq x)\)</span> ни в большую, ни в меньшую сторону.</p>
+<p>Докажем половину утверждения, вторая половина доказывается по аналогии. Основная идея доказательства такова: вероятность <span class="math inline">\(\mathop{\mathrm{\mathbb{P}}}(R_n \leq x)\)</span> можно заменить на ожидание <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}(I(R_n \leq x))\)</span>, а «ступенчатый» индикатор <span class="math inline">\(I\)</span> можно сколь угодно точно приблизить гладкой много раз дифференцируемой функцией.</p>
+<p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> вероятность <span class="math inline">\(\mathop{\mathrm{\mathbb{P}}}(R_n \leq x) &gt; \mathop{\mathrm{\mathbb{P}}}(R \leq x) - \varepsilon\)</span>.</p>
 <p>С помощью ожидания индикатора и функции распределения <span class="math inline">\(F\)</span> величины <span class="math inline">\(R\)</span> наша цель записывается так: <span class="math display">\[
-\E(I(R_n \leq x)) &gt; F(x) - \varepsilon.
+\mathop{\mathrm{\mathbb{E}}}(I(R_n \leq x)) &gt; F(x) - \varepsilon.
 \]</span></p>
 <p>Отступим от точки <span class="math inline">\(x\)</span> чуть-чуть влево, в точку <span class="math inline">\(x - \delta\)</span>. В силу непрерывности <span class="math inline">\(F\)</span> в точке <span class="math inline">\(x\)</span> размер оступа <span class="math inline">\(\delta\)</span> можно выбрать так, что <span class="math inline">\(F(x-\delta) &gt; F(x) - \varepsilon/2\)</span>.</p>
 <p>Теперь придумаем гладкую функцию <span class="math inline">\(h\)</span>, которая чуть-чуть занижает индикатор <span class="math inline">\(I(R_n \leq x)\)</span>. А именно, левее <span class="math inline">\(x-\delta\)</span> функция <span class="math inline">\(h\)</span> равна 1, правее <span class="math inline">\(x\)</span> функция <span class="math inline">\(h\)</span> равна нулю, а на отрезке <span class="math inline">\([x-\delta, x]\)</span> функция <span class="math inline">\(h\)</span> плавно спускается от 1 к 0. По построению, <span class="math display">\[
 I(R_n \leq x - \delta) \leq h(R_n) \leq I(R_n \leq x).
 \]</span> Делаем первый шаг по замене индикатора на не превосходящую его гладкую функцию <span class="math inline">\(h\)</span>: <span class="math display">\[
-\P(R_n\leq x) = \E(I(R_n \leq x)) \geq \E(h(R_n)).
+\mathop{\mathrm{\mathbb{P}}}(R_n\leq x) = \mathop{\mathrm{\mathbb{E}}}(I(R_n \leq x)) \geq \mathop{\mathrm{\mathbb{E}}}(h(R_n)).
 \]</span> Теперь выберем <span class="math inline">\(n\)</span> достаточно большим, так, чтобы <span class="math display">\[
-\E(h(R_n)) \geq \E(h(R)) - \varepsilon/2.
+\mathop{\mathrm{\mathbb{E}}}(h(R_n)) \geq \mathop{\mathrm{\mathbb{E}}}(h(R)) - \varepsilon/2.
 \]</span> Теперь заменяем гладкую функцию <span class="math inline">\(h\)</span> на не превосходящий её индикатор, <span class="math display">\[
-\E(h(R)) - \varepsilon/2 \geq \E(I(R \leq x-\delta)) - \varepsilon/2 = F(x-\delta) - \varepsilon/2.
+\mathop{\mathrm{\mathbb{E}}}(h(R)) - \varepsilon/2 \geq \mathop{\mathrm{\mathbb{E}}}(I(R \leq x-\delta)) - \varepsilon/2 = F(x-\delta) - \varepsilon/2.
 \]</span> Вспоминаем, что точку <span class="math inline">\(x-\delta\)</span> мы выбрали недалеко от <span class="math inline">\(x\)</span> и получаем в итоге, что начиная с некоторого <span class="math inline">\(n\)</span> <span class="math display">\[
-\P(X_n \leq x) \geq F(x) - \varepsilon.
+\mathop{\mathrm{\mathbb{P}}}(X_n \leq x) \geq F(x) - \varepsilon.
 \]</span> Аналогично доказывается и вторая половина. На этот раз надо отступать от <span class="math inline">\(x\)</span> вправо в точку <span class="math inline">\(x+\delta\)</span>, и заменять индикатор <span class="math inline">\(I(R_n \leq x)\)</span> мажорирующей его гладкой функцией <span class="math inline">\(h\)</span>.</p>
 </div>
 </div>
@@ -227,7 +227,7 @@ g(t) = \begin{cases}
 <div class="callout-body-container callout-body">
 <p>Докажите, что для любого <span class="math inline">\(\varepsilon\)</span> начиная с некоторого <span class="math inline">\(n\)</span> выполнено неравенство</p>
 <p><span class="math display">\[
-\P(X_n \leq x) \leq F(x) + \varepsilon.
+\mathop{\mathrm{\mathbb{P}}}(X_n \leq x) \leq F(x) + \varepsilon.
 \]</span></p>
 </div>
 </div>
@@ -247,8 +247,8 @@ g(t) = \begin{cases}
 </div>
 <div class="callout-body-container callout-body">
 <p>Если величины <span class="math inline">\(Q_1\)</span>, <span class="math inline">\(Q_2\)</span>, , независимы и одинаково распределены с конечным ожиданием <span class="math inline">\(\mu\)</span> и дисперсией <span class="math inline">\(\sigma^2\)</span>, то отмасштабированная сумма <span class="math display">\[
-Z_n = \frac{\sum_{i=1}^n Q_i - \E(\sum_{i=1}^n Q_i)}{\sqrt{\Var(\sum_{i=1}^n Q_i)}}
-\]</span> стремится по распределению к <span class="math inline">\(\cN(0;1)\)</span>.</p>
+Z_n = \frac{\sum_{i=1}^n Q_i - \mathop{\mathrm{\mathbb{E}}}(\sum_{i=1}^n Q_i)}{\sqrt{\mathop{\mathrm{Var}}(\sum_{i=1}^n Q_i)}}
+\]</span> стремится по распределению к <span class="math inline">\(\mathcal{N}(0;1)\)</span>.</p>
 </div>
 </div>
 </section>
@@ -256,7 +256,7 @@ Z_n = \frac{\sum_{i=1}^n Q_i - \E(\sum_{i=1}^n Q_i)}{\sqrt{\Var(\sum_{i=1}^n Q_i
 <h1>Доказательство</h1>
 <p>Для начала представим <span class="math inline">\(S_n\)</span> в виде отмасштабированных слагаемых. <span class="math display">\[
 Z_n = \frac{Q_1 - \mu}{\sigma \sqrt n} + \ldots + \frac{Q_{n-1} - \mu}{\sigma \sqrt n} + \frac{Q_n - \mu}{\sigma \sqrt n} = X_1 + \ldots + X_{n-1} + X_n
-\]</span> Замечаем, что <span class="math inline">\(\E(X_i) = 0\)</span>, <span class="math inline">\(\Var(X_i) = 1/n\)</span>.</p>
+\]</span> Замечаем, что <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}(X_i) = 0\)</span>, <span class="math inline">\(\mathop{\mathrm{Var}}(X_i) = 1/n\)</span>.</p>
 <section id="sec-swapping-idea" class="level2">
 <h2 class="anchored" data-anchor-id="sec-swapping-idea">Идея постепенной подмены слагаемых</h2>
 <p>Теперь потихоньку начнем менять слагаемые в правом хвосте на независимые слагаемые <span class="math inline">\(Y_i\)</span> с таким же нулевым ожиданием, такой же дисперсией <span class="math inline">\(1/n\)</span>, но нормально распределенные:</p>
@@ -275,19 +275,19 @@ S_{5, 3} = X_1 + X_2 + 0 + Y_4 + Y_5,
 \sum_{i=1}^n X_i = Z_{n,n} \overset{-X_n}{\longrightarrow}S_{n,n}\overset{+Y_n}{\longrightarrow}Z_{n,n-1}\overset{-X_{n-1}}{\longrightarrow} \ldots \overset{-X_2}{\longrightarrow}S_{n,2}\overset{+Y_2}{\longrightarrow}Z_{n,1}\overset{-X_1}{\longrightarrow}S_{n,1}\overset{+Y_1}{\longrightarrow}Z_{n,0}=\sum_{i=1}^n Y_i
 \]</span> В схеме <span class="math inline">\(n\)</span> шагов, каждый из которых состоит из двух полушагов, удаления <span class="math inline">\(X_i\)</span> и добавления <span class="math inline">\(Y_i\)</span>.</p>
 <p>Заметим, что <span class="math inline">\(S_{n,i}\)</span> не зависит ни от <span class="math inline">\(X_i\)</span>, ни от <span class="math inline">\(Y_i\)</span>. Это пригодится.</p>
-<p>Замечаем также, что <span class="math inline">\(Z_{n,0} = Y_1 + \ldots + Y_n \sim \cN(0;1)\)</span>.</p>
-<p>В силу леммы нам достаточно доказать, что для любой бесконечно дифференцируемой <span class="math inline">\(h\)</span> с ограниченными производными <span class="math inline">\(\E(h(Z_{n,n})) \to \E(h(Z_{n,0}))\)</span>.</p>
+<p>Замечаем также, что <span class="math inline">\(Z_{n,0} = Y_1 + \ldots + Y_n \sim \mathcal{N}(0;1)\)</span>.</p>
+<p>В силу леммы нам достаточно доказать, что для любой бесконечно дифференцируемой <span class="math inline">\(h\)</span> с ограниченными производными <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}(h(Z_{n,n})) \to \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,0}))\)</span>.</p>
 </section>
 <section id="выбираем-произвольное-эпсилон" class="level2">
 <h2 class="anchored" data-anchor-id="выбираем-произвольное-эпсилон">Выбираем произвольное эпсилон</h2>
 <p>Поехали. Выбираем произвольное положительное <span class="math inline">\(\varepsilon\)</span>. Наша цель — доказать, что начиная с некоторого <span class="math inline">\(n\)</span> отличие этих двух ожиданий невелико, <span class="math display">\[
-\E(h(Z_{n,n})) - \E(h(Z_{n,0})) \in [-\varepsilon;+\varepsilon].
+\mathop{\mathrm{\mathbb{E}}}(h(Z_{n,n})) - \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,0})) \in [-\varepsilon;+\varepsilon].
 \]</span></p>
 <p>Посмотрим на нашу схему подмен <span class="math display">\[
 h\left(\sum_{i=1}^n X_i\right)=h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})\overset{-X_{n-1}}{\longrightarrow} \ldots \overset{+Y_2}{\longrightarrow}h(Z_{n,1})\overset{-X_1}{\longrightarrow}h(S_{n,1})\overset{+Y_1}{\longrightarrow}h(Z_{n,0})=h\left(\sum_{i=1}^n Y_i\right)
 \]</span></p>
 <p>С ростом <span class="math inline">\(n\)</span> цепочка растет, а каждый шаг по идее должен становится всё меньше. Если мы докажем, что начиная с некоторого <span class="math inline">\(n\)</span> разница <span class="math display">\[
-\E(h(Z_{n,i})) - \E(h(Z_{n,i-1}))
+\mathop{\mathrm{\mathbb{E}}}(h(Z_{n,i})) - \mathop{\mathrm{\mathbb{E}}}(h(Z_{n,i-1}))
 \]</span> от <strong>каждого</strong> шага становится по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>, то дело будет в шляпе!</p>
 </section>
 <section id="анализ-первой-пары-полушагов" class="level2">
@@ -296,10 +296,10 @@ h\left(\sum_{i=1}^n X_i\right)=h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,
 h(Z_{n,n}) \overset{-X_n}{\longrightarrow}h(S_{n,n})\overset{+Y_n}{\longrightarrow}h(Z_{n,n-1})
 \]</span> Доказательство для других пар полушагов полностью аналогично.</p>
 <p>Наша разница <span class="math inline">\(h(Z_{n,n}) - h(Z_{n,n-1})\)</span> разбивается в два полушага, <span class="math display">\[
-\E h(Z_{n,n}) - \E h(Z_{n,n-1}) = \left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right) - \left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right).
+\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) = \left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right) - \left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right).
 \]</span></p>
-<p>Заглянем в будущее, чтобы осознать план действий. Оказывается, что обе полушаговых разницы, <span class="math inline">\(\left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right)\)</span> и <span class="math inline">\(\left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right)\)</span>, очень похожи на некоторую общую величину. Эта величина окажется равной <span class="math inline">\(\E\left(\frac{h''(S_{n,n})}{2n}\right)\)</span>, но это не важно. Важно, что начиная с некоторого <span class="math inline">\(n\)</span> отличие каждой полушаговой разницы от этой общей величины будет меньше <span class="math inline">\(\varepsilon/2n\)</span>. При вычитании двух разниц общая величина уничтожится, и разница для целого шага окажется по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>.</p>
-<p>Проведем доказательство для разницы первого полушага, <span class="math inline">\(\left(\E h(Z_{n,n}) - \E h(S_{n,n}) \right)\)</span>. Доказательство для разницы второго полушага, <span class="math inline">\(\left(\E h(Z_{n,n-1}) - \E h(S_{n,n}) \right)\)</span>, аналогично.</p>
+<p>Заглянем в будущее, чтобы осознать план действий. Оказывается, что обе полушаговых разницы, <span class="math inline">\(\left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right)\)</span> и <span class="math inline">\(\left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right)\)</span>, очень похожи на некоторую общую величину. Эта величина окажется равной <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2n}\right)\)</span>, но это не важно. Важно, что начиная с некоторого <span class="math inline">\(n\)</span> отличие каждой полушаговой разницы от этой общей величины будет меньше <span class="math inline">\(\varepsilon/2n\)</span>. При вычитании двух разниц общая величина уничтожится, и разница для целого шага окажется по модулю меньше <span class="math inline">\(\varepsilon/n\)</span>.</p>
+<p>Проведем доказательство для разницы первого полушага, <span class="math inline">\(\left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right)\)</span>. Доказательство для разницы второго полушага, <span class="math inline">\(\left(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \right)\)</span>, аналогично.</p>
 <p>В этот момент можно уже не писать индекс <span class="math inline">\((n,n)\)</span> у <span class="math inline">\(Z\)</span> и <span class="math inline">\(S\)</span> :)</p>
 </section>
 <section id="линеаризация-разницы-для-полушага" class="level2">
@@ -313,33 +313,33 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(C)}{2!}X_n^2.
 \]</span> Прибавим и вычтем справа в числителе <span class="math inline">\(h''(S_{n,n})\)</span>, <span class="math display">\[
 h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2.
 \]</span></p>
-<p>Берём математическое ожидание, вспомнив, что <span class="math inline">\(\E(X_n) =0\)</span>, <span class="math inline">\(\Var(X_n)= 1/n\)</span>, а <span class="math inline">\(X_n\)</span> не зависит от <span class="math inline">\(S_n\)</span>, <span class="math display">\[
-\E h(Z_{n,n}) - \E h(S_{n,n}) = 0 + \E\left(\frac{h''(S_{n,n})}{2n}\right) + \E\left(\frac{h''(C) - h''(S_{n,n})}{2}X_n^2\right).
+<p>Берём математическое ожидание, вспомнив, что <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}(X_n) =0\)</span>, <span class="math inline">\(\mathop{\mathrm{Var}}(X_n)= 1/n\)</span>, а <span class="math inline">\(X_n\)</span> не зависит от <span class="math inline">\(S_n\)</span>, <span class="math display">\[
+\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) = 0 + \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2n}\right) + \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(C) - h''(S_{n,n})}{2}X_n^2\right).
 \]</span></p>
 </section>
 <section id="два-случая-для-сложного-слагаемого" class="level2">
 <h2 class="anchored" data-anchor-id="два-случая-для-сложного-слагаемого">Два случая для сложного слагаемого</h2>
-<p>Сосредоточимся на последнем слагаемом и рассмотрим два случая, в зависимости от того, больше ли <span class="math inline">\(\abs{X_n}\)</span> чем <span class="math inline">\(\delta\)</span>. <span class="math display">\[
-\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2 = \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} \leq \delta)\right) + \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} &gt; \delta)\right).
-\]</span> Изучаем первое слагаемое. Вспомним, что точка <span class="math inline">\(C\)</span> находится между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, а <span class="math inline">\(S_{n,n} + X_n = Z_{n,n}\)</span>. Поэтому <span class="math inline">\(\abs{C - S_{n,n}} \leq \delta\)</span>, если <span class="math inline">\(\abs{X_n}\leq \delta\)</span>.</p>
+<p>Сосредоточимся на последнем слагаемом и рассмотрим два случая, в зависимости от того, больше ли <span class="math inline">\(\left\lvert X_n \right\rvert\)</span> чем <span class="math inline">\(\delta\)</span>. <span class="math display">\[
+\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2 = \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\left\lvert X_n \right\rvert \leq \delta)\right) + \left(\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\left\lvert X_n \right\rvert &gt; \delta)\right).
+\]</span> Изучаем первое слагаемое. Вспомним, что точка <span class="math inline">\(C\)</span> находится между <span class="math inline">\(S_{n,n}\)</span> и <span class="math inline">\(Z_{n,n}\)</span>, а <span class="math inline">\(S_{n,n} + X_n = Z_{n,n}\)</span>. Поэтому <span class="math inline">\(\left\lvert C - S_{n,n} \right\rvert \leq \delta\)</span>, если <span class="math inline">\(\left\lvert X_n \right\rvert\leq \delta\)</span>.</p>
 <p>У функции <span class="math inline">\(h\)</span> ограничена третья производная, выберем <span class="math inline">\(\delta\)</span> настолько маленьким, чтобы зажать разницу <span class="math inline">\(h''(C) - h''(S_{n,n})\)</span> до величины меньшей <span class="math inline">\(\varepsilon/2\)</span>.</p>
 <p>Получаем ограничение для первого слагаемого, <span class="math display">\[
-\E\abs{\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} \leq \delta)} \leq E\left(\frac{\varepsilon}{4}X_n^2\right)=\frac{\varepsilon}{4n}
+\mathop{\mathrm{\mathbb{E}}}\left\lvert \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\left\lvert X_n \right\rvert \leq \delta) \right\rvert \leq E\left(\frac{\varepsilon}{4}X_n^2\right)=\frac{\varepsilon}{4n}
 \]</span> Изучаем второе слагаемое. У функции <span class="math inline">\(h\)</span> ограничена вторая производная константой <span class="math inline">\(M\)</span>.</p>
 <p><span class="math display">\[
-\E\abs{\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\abs{X_n} &gt; \delta)} \leq E\left(\frac{M + M}{4}X_n^2I(\abs{X_n} &gt; \delta)\right)=\frac{M}{2n}\E(X_n^2I(\abs{X_n} &gt; \delta))
+\mathop{\mathrm{\mathbb{E}}}\left\lvert \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2I(\left\lvert X_n \right\rvert &gt; \delta) \right\rvert \leq E\left(\frac{M + M}{4}X_n^2I(\left\lvert X_n \right\rvert &gt; \delta)\right)=\frac{M}{2n}\mathop{\mathrm{\mathbb{E}}}(X_n^2I(\left\lvert X_n \right\rvert &gt; \delta))
 \]</span></p>
-<p>Подберем <span class="math inline">\(n\)</span> настолько большим, что <span class="math inline">\(\E(X_n^2 I(\abs{X_n} &gt; \delta)) &lt; \varepsilon/2M\)</span>. При этом второе слагаемое будет также ограничено величиной <span class="math inline">\(\varepsilon/4n\)</span>. Тем самым мы доказали, что начиная с некоторого <span class="math inline">\(n\)</span> <span class="math display">\[
-\E\abs{\frac{h''(C) - h''(S_{n,n})}{2!}X_n^2 } \leq \frac{\varepsilon}{4n} + \frac{\varepsilon}{4n} = \frac{\varepsilon}{2n}
+<p>Подберем <span class="math inline">\(n\)</span> настолько большим, что <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}(X_n^2 I(\left\lvert X_n \right\rvert &gt; \delta)) &lt; \varepsilon/2M\)</span>. При этом второе слагаемое будет также ограничено величиной <span class="math inline">\(\varepsilon/4n\)</span>. Тем самым мы доказали, что начиная с некоторого <span class="math inline">\(n\)</span> <span class="math display">\[
+\mathop{\mathrm{\mathbb{E}}}\left\lvert \frac{h''(C) - h''(S_{n,n})}{2!}X_n^2  \right\rvert \leq \frac{\varepsilon}{4n} + \frac{\varepsilon}{4n} = \frac{\varepsilon}{2n}
 \]</span> То есть, <span class="math display">\[
-\E h(Z_{n,n}) - \E h(S_{n,n}) \in \left[ \E\left(\frac{h''(S_{n,n})}{2n}\right) - \frac{\varepsilon}{2n}; \E\left(\frac{h''(S_{n,n})}{2n}\right) + \frac{\varepsilon}{2n} \right].
-\]</span> В этот же диапазон попадает и величина <span class="math inline">\(\E h(Z_{n,n-1}) - \E h(S_{n,n})\)</span>, поэтому <span class="math display">\[
-\E h(Z_{n,n}) - \E h(Z_{n,n-1}) \in \left[ - \frac{\varepsilon}{n}; + \frac{\varepsilon}{n} \right].
+\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \in \left[ \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2n}\right) - \frac{\varepsilon}{2n}; \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2n}\right) + \frac{\varepsilon}{2n} \right].
+\]</span> В этот же диапазон попадает и величина <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n})\)</span>, поэтому <span class="math display">\[
+\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) \in \left[ - \frac{\varepsilon}{n}; + \frac{\varepsilon}{n} \right].
 \]</span></p>
 </section>
 <section id="взгляд-назад" class="level2">
 <h2 class="anchored" data-anchor-id="взгляд-назад">Взгляд назад</h2>
-<p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(\E h(Z_{n,n}) - \E h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Изменение <span class="math inline">\(\E h\)</span>, вызванное каждым шагом, состоит из разницы изменений вызванных полушагами. А изменение от каждого полушага при больших <span class="math inline">\(n\)</span> не отличается от общей константы более чем на <span class="math inline">\(\varepsilon/2n\)</span>. Поэтому каждый шаг даёт изменение не больше <span class="math inline">\(\varepsilon/n\)</span>, и вся разница <span class="math inline">\(\E h(Z_{n,n}) - \E h(Z_{n,0})\)</span> начиная с некоторого момента меньше <span class="math inline">\(\varepsilon\)</span>.</p>
+<p>Вспомним наш долгий путь. Сначала мы разбили разницу <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,0})\)</span> на <span class="math inline">\(2n\)</span> полушагов. Каждый шаг состоит из полушага удаления <span class="math inline">\(X_i\)</span> и полушага добавления <span class="math inline">\(Y_i\)</span>. Изменение <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h\)</span>, вызванное каждым шагом, состоит из разницы изменений вызванных полушагами. А изменение от каждого полушага при больших <span class="math inline">\(n\)</span> не отличается от общей константы более чем на <span class="math inline">\(\varepsilon/2n\)</span>. Поэтому каждый шаг даёт изменение не больше <span class="math inline">\(\varepsilon/n\)</span>, и вся разница <span class="math inline">\(\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n}) - \mathop{\mathrm{\mathbb{E}}}h(Z_{n,0})\)</span> начиная с некоторого момента меньше <span class="math inline">\(\varepsilon\)</span>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -354,7 +354,7 @@ h(Z_{n,n}) - h(S_{n,n}) = h'(S_{n,n})X_n + \frac{h''(S_{n,n})}{2!}X_n^2 + \frac{
 <div class="callout-body-container callout-body">
 <p>Докажите, что для любого <span class="math inline">\(\varepsilon\)</span> начиная с некоторого <span class="math inline">\(n\)</span> выполнено условие</p>
 <p><span class="math display">\[
-\E h(Z_{n,n-1}) - \E h(S_{n,n}) \in \left[ \E\left(\frac{h''(S_{n,n})}{2!}\right) - \frac{\varepsilon}{2n}; \E\left(\frac{h''(S_{n,n})}{2!}\right) + \frac{\varepsilon}{2n} \right].
+\mathop{\mathrm{\mathbb{E}}}h(Z_{n,n-1}) - \mathop{\mathrm{\mathbb{E}}}h(S_{n,n}) \in \left[ \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2!}\right) - \frac{\varepsilon}{2n}; \mathop{\mathrm{\mathbb{E}}}\left(\frac{h''(S_{n,n})}{2!}\right) + \frac{\varepsilon}{2n} \right].
 \]</span></p>
 </div>
 </div>

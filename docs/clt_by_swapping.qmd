@@ -59,6 +59,15 @@ editor_options:
     wrap: 72
 ---
 
+::: {.content-hidden}
+\newcommand{\cN}{\mathcal{N}}
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+:::
+
 
 
 Центральная предельная теорема (ЦПТ) обещает нам, что сумма независимых одинаково распределенных слагаемых примерно нормально распределена. 
