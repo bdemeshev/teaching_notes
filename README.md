@@ -1,3 +1,14 @@
+# Заметки-статьи
+
+[Теорем Эрроу о диктаторе](https://bdemeshev.github.io/teaching_notes/arrow_impossibility)
+
+[ЦПТ через подмену слагаемых](https://bdemeshev.github.io/teaching_notes/clt_by_swapping)
+
+[Достаточные статистики](https://bdemeshev.github.io/teaching_notes/sufficient_statistic)
+
+
+
+
 # teaching_notes
 
 * Есть одна довольно известная задача по комбинаторике. 
