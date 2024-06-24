@@ -83,6 +83,14 @@ window.Quarto = {
    
   <ul class="collapse">
   <li><a href="#двойственная-функция" id="toc-двойственная-функция" class="nav-link active" data-scroll-target="#двойственная-функция">Двойственная функция</a></li>
+  <li><a href="#двойственная-задача" id="toc-двойственная-задача" class="nav-link" data-scroll-target="#двойственная-задача">Двойственная задача</a>
+  <ul class="collapse">
+  <li><a href="#интуиция-про-штрафы-и-бонусы" id="toc-интуиция-про-штрафы-и-бонусы" class="nav-link" data-scroll-target="#интуиция-про-штрафы-и-бонусы">Интуиция про штрафы и бонусы</a></li>
+  <li><a href="#интуиция-про-жёсткие-и-мягкие-ограничения" id="toc-интуиция-про-жёсткие-и-мягкие-ограничения" class="nav-link" data-scroll-target="#интуиция-про-жёсткие-и-мягкие-ограничения">Интуиция про жёсткие и мягкие ограничения</a></li>
+  <li><a href="#линейное-программирование" id="toc-линейное-программирование" class="nav-link" data-scroll-target="#линейное-программирование">Линейное программирование</a></li>
+  <li><a href="#попытка-ограничить-целевую-функцию" id="toc-попытка-ограничить-целевую-функцию" class="nav-link" data-scroll-target="#попытка-ограничить-целевую-функцию">Попытка ограничить целевую функцию</a></li>
+  </ul></li>
+  <li><a href="#нырнём-обратно-в-общее-определение" id="toc-нырнём-обратно-в-общее-определение" class="nav-link" data-scroll-target="#нырнём-обратно-в-общее-определение">Нырнём обратно в общее определение</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Другие форматы</h2><ul><li><a href="duality.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
@@ -115,14 +123,14 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Двойственная функция
+Определение двойственной функции
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Двойственная функция в точке <span class="math inline">\(x^*\)</span> показывает, насколько минимум надо опустить прямую <span class="math inline">\(\langle x, x^* \rangle\)</span> вниз, чтобы она целиком оказалась ниже функции <span class="math inline">\(f(x)\)</span>.</p>
+<p>Двойственная функция в точке <span class="math inline">\(x^*\)</span> показывает, насколько минимум надо опустить прямую (или плоскость) <span class="math inline">\(\langle x, x^* \rangle\)</span> вниз, чтобы она целиком оказалась ниже функции <span class="math inline">\(f(x)\)</span>.</p>
 <p><span class="math display">\[
 f^*(x^*) = \inf_t \{t \mid \langle x, x^* \rangle - t \leq f(x), \text{ для любого } x\}
-\]</span></p>
+\]</span> Вектор <span class="math inline">\(x^*\)</span> содержит угловые коэффициенты прямой, которую мы двигаем.</p>
 </div>
 </div>
 <p>Заметим, что определение легко переформулировать как поиск максимальной разницы от функции <span class="math inline">\(f(x)\)</span> вверх до прямой <span class="math inline">\(\langle x, x^* \rangle\)</span>. Если в какой-то точке <span class="math inline">\(x\)</span> прямая <span class="math inline">\(\langle x, x^* \rangle\)</span> лежит очень высоко относительно функции <span class="math inline">\(f(x)\)</span>, то и минимальная величина, на которую придется опустить прямую очень велика.</p>
@@ -150,6 +158,44 @@ f^*(x^*) = \sup_x \{\langle x, x^* \rangle - f(x)\}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
+Упражнение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Как изменится двойственная функция, если сдвинуть исходную функцию на вектор <span class="math inline">\(b\)</span> вдоль аргументов?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Решение упражнения
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Определим сдвинутую функцию <span class="math inline">\(g(x) = f(x - b)\)</span>.</p>
+<p>Находим <span class="math inline">\(g^*(x^*)\)</span>: <span class="math display">\[
+g^*(x^*) = \sup_x \{\langle x, x^* \rangle - g(x)\} = \sup_x \{\langle x, x^* \rangle - f(x - b)\}
+\]</span></p>
+<p>Прибавим и вычтем <span class="math inline">\(\langle x, b \rangle\)</span>: <span class="math display">\[
+g^*(x^*) = \sup_x \{\langle x - b, x^* \rangle - f(x - b)\} + \langle b, x^* \rangle = \sup_{w} \{\langle w, x^* \rangle - f(w)\} + \langle b, x^* \rangle
+\]</span></p>
+<p>Следовательно, <span class="math display">\[
+g^*(x^*) = f^*(x^*) + \langle b, x^* \rangle
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
 Теоремка
 </div>
 </div>
@@ -160,7 +206,7 @@ f^{**}(x) \leq f(x)
 </div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -169,7 +215,7 @@ f^{**}(x) \leq f(x)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Для доказательства теоремы предположим, что <span class="math inline">\(f(x) \leq a\)</span>, и докажем, что в этом случае <span class="math inline">\(f^{**}(x) \leq a\)</span>.</p>
 <p>На старт: <span class="math display">\[
@@ -213,7 +259,7 @@ f^{**}(x) = f(x)
 </div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -222,12 +268,15 @@ f^{**}(x) = f(x)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>В доказательстве теоремки о неравенстве есть только один неравносильный переход. Обратим на него внимание.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="двойственная-задача" class="level1">
+<h1>Двойственная задача</h1>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -249,6 +298,22 @@ f^{**}(x) = f(x)
 \]</span></p>
 </div>
 </div>
+<p>Заметим, что двойственная задача определена только после того, как мы договорились, как вносить возмущения в исходную задачу. Для разного типа возмущений будут возникать разные двойственные задачи.</p>
+<section id="интуиция-про-штрафы-и-бонусы" class="level2">
+<h2 class="anchored" data-anchor-id="интуиция-про-штрафы-и-бонусы">Интуиция про штрафы и бонусы</h2>
+</section>
+<section id="интуиция-про-жёсткие-и-мягкие-ограничения" class="level2">
+<h2 class="anchored" data-anchor-id="интуиция-про-жёсткие-и-мягкие-ограничения">Интуиция про жёсткие и мягкие ограничения</h2>
+</section>
+<section id="линейное-программирование" class="level2">
+<h2 class="anchored" data-anchor-id="линейное-программирование">Линейное программирование</h2>
+</section>
+<section id="попытка-ограничить-целевую-функцию" class="level2">
+<h2 class="anchored" data-anchor-id="попытка-ограничить-целевую-функцию">Попытка ограничить целевую функцию</h2>
+</section>
+</section>
+<section id="нырнём-обратно-в-общее-определение" class="level1">
+<h1>Нырнём обратно в общее определение</h1>
 <p>Определим функцию <span class="math inline">\(h(y)\)</span> как оптимум исходной задачи про возмущении <span class="math inline">\(y\)</span>, <span class="math display">\[
 h(y) = \min_x \phi(x, y)
 \]</span></p>

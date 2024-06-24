@@ -207,7 +207,7 @@
 \section{Двойственная
 функция}\label{ux434ux432ux43eux439ux441ux442ux432ux435ux43dux43dux430ux44f-ux444ux443ux43dux43aux446ux438ux44f}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Двойственная функция}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Двойственная функция}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Двойственная функция в точке \(x^*\) показывает, насколько минимум надо
 опустить прямую \(\langle x, x^* \rangle\) вниз, чтобы она целиком
@@ -225,7 +225,7 @@ f^*(x^*) = \inf_t \{t \mid \langle x, x^* \rangle - t \leq f(x), \text{ для �
 очень высоко относительно функции \(f(x)\), то и минимальная величина,
 на которую придется опустить прямую очень велика.
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Двойственная функция}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Двойственная функция}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Двойственная функция в точке \(x^*\) показывает, насколько минимум надо
 опустить прямую \(\langle x, x^* \rangle\) вниз, чтобы она целиком
@@ -242,7 +242,32 @@ f^*(x^*) = \sup_x \{\langle x, x^* \rangle - f(x)\}
 
 Примеры.
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Упражнение}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
+
+Как изменится двойственная функция, если сдвинуть исходную функцию на
+вектор \(b\) вдоль аргументов?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-caution-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-caution-color!10!white, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Решение упражнения}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
+
+Определим сдвинутую функцию \(g(x) = f(x - b)\).
+
+Находим \(g^*(x^*)\): \[
+g^*(x^*) = \sup_x \{\langle x, x^* \rangle - g(x)\} = \sup_x \{\langle x, x^* \rangle - f(x - b)\} 
+\]
+
+Прибавим и вычтем \(\langle x, b \rangle\): \[
+g^*(x^*) = \sup_x \{\langle x - b, x^* \rangle - f(x - b)\} + \langle b, x^* \rangle = \sup_{w} \{\langle w, x^* \rangle - f(w)\} + \langle b, x^* \rangle
+\]
+
+Следовательно, \[
+g^*(x^*) = f^*(x^*) + \langle b, x^* \rangle
+\]
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 \[
 f^{**}(x) \leq f(x)
@@ -250,7 +275,7 @@ f^{**}(x) \leq f(x)
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Доказательство неравенства}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-warning-color!10!white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Доказательство неравенства}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Для доказательства теоремы предположим, что \(f(x) \leq a\), и докажем,
 что в этом случае \(f^{**}(x) \leq a\).
@@ -291,7 +316,7 @@ a \geq f^{**}(x).
 
 Для хороших выпуклых функций, оказывается, что \(f(x)=f^{**}(x)\).
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Если \ldots., то \[
 f^{**}(x) = f(x)
@@ -299,14 +324,17 @@ f^{**}(x) = f(x)
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Доказательство случая равенства}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-warning-color!10!white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Доказательство случая равенства}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 В доказательстве теоремки о неравенстве есть только один неравносильный
 переход. Обратим на него внимание.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Правильное определение двойственной задачи}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\section{Двойственная
+задача}\label{ux434ux432ux43eux439ux441ux442ux432ux435ux43dux43dux430ux44f-ux437ux430ux434ux430ux447ux430}
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Правильное определение двойственной задачи}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Рассмотрим задачу поиска минимума функции \(\phi\) по \(x\) с параметром
 \(y\). \[
@@ -324,6 +352,25 @@ f^{**}(x) = f(x)
 
 \end{tcolorbox}
 
+Заметим, что двойственная задача определена только после того, как мы
+договорились, как вносить возмущения в исходную задачу. Для разного типа
+возмущений будут возникать разные двойственные задачи.
+
+\subsection{Интуиция про штрафы и
+бонусы}\label{ux438ux43dux442ux443ux438ux446ux438ux44f-ux43fux440ux43e-ux448ux442ux440ux430ux444ux44b-ux438-ux431ux43eux43dux443ux441ux44b}
+
+\subsection{Интуиция про жёсткие и мягкие
+ограничения}\label{ux438ux43dux442ux443ux438ux446ux438ux44f-ux43fux440ux43e-ux436ux451ux441ux442ux43aux438ux435-ux438-ux43cux44fux433ux43aux438ux435-ux43eux433ux440ux430ux43dux438ux447ux435ux43dux438ux44f}
+
+\subsection{Линейное
+программирование}\label{ux43bux438ux43dux435ux439ux43dux43eux435-ux43fux440ux43eux433ux440ux430ux43cux43cux438ux440ux43eux432ux430ux43dux438ux435}
+
+\subsection{Попытка ограничить целевую
+функцию}\label{ux43fux43eux43fux44bux442ux43aux430-ux43eux433ux440ux430ux43dux438ux447ux438ux442ux44c-ux446ux435ux43bux435ux432ux443ux44e-ux444ux443ux43dux43aux446ux438ux44e}
+
+\section{Нырнём обратно в общее
+определение}\label{ux43dux44bux440ux43dux451ux43c-ux43eux431ux440ux430ux442ux43dux43e-ux432-ux43eux431ux449ux435ux435-ux43eux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}
+
 Определим функцию \(h(y)\) как оптимум исходной задачи про возмущении
 \(y\), \[
 h(y) = \min_x \phi(x, y)
@@ -338,7 +385,7 @@ h(y) = \min_x \phi(x, y)
 
 Помимо ещё одной абстрактной формулировки:
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Правильное определение двойственной задачи}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Правильное определение двойственной задачи}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Рассмотрим задачу поиска минимума функции \(\phi\) по \(x\) с параметром
 \(y\). \[
@@ -356,7 +403,7 @@ h(y) = \min_x \phi(x, y)
 
 Следовательно, мы бесплатно получаем две теоремки:
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Если \(h(y) = \min_x \phi(x, y)\) --- оптимум возмущённой задачи, то \[
 h^{**}(0) = \min_{y^*} \phi^*(0, y^*) \leq \min_x \phi(x, 0) = h(0).
@@ -364,7 +411,7 @@ h^{**}(0) = \min_{y^*} \phi^*(0, y^*) \leq \min_x \phi(x, 0) = h(0).
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colback=white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, leftrule=.75mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, bottomtitle=1mm, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, rightrule=.15mm, breakable, toprule=.15mm, left=2mm]
 
 Если \(h(y) = \min_x \phi(x, y)\) --- оптимум возмущённой задачи, и
 \ldots, то \[
