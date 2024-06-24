@@ -1,0 +1,380 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{mathtools}
+\newcommand{\cN}{\mathcal{N}}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+% TODO: automatic scaling does not work in pdf???
+
+% TODO: no cyrillic font in section titles!
+\setmainfont{Linux Libertine}
+
+%\newfontfamily{\cyrillicfont}{Linux Libertine}
+%\newfontfamily{\cyrillicfonttt}{Linux Libertine}
+%\newfontfamily{\cyrillicfontsf}{Linux Libertine}
+%\newfontfamily{\cyrillicfontrm}{Linux Libertine}
+%\newfontfamily{\cyrillicfontbf}{Linux Libertine}
+%\newfontfamily{\cyrillicfontmd}{Linux Libertine}
+%\newfontfamily{\cyrillicfontit}{Linux Libertine}
+%\newfontfamily{\cyrillicfontsl}{Linux Libertine}
+%\newfontfamily{\cyrillicfontsc}{Linux Libertine}
+%\newfontfamily{\cyrillicfontup}{Linux Libertine}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список Иллюстраций}
+\else
+  \newcommand\listfigurename{Список Иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список Таблиц}
+\else
+  \newcommand\listtablename{Список Таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Список Каталогов}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Двойственность},
+  pdflang={ru},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Двойственность}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Двойственная
+функция}\label{ux434ux432ux43eux439ux441ux442ux432ux435ux43dux43dux430ux44f-ux444ux443ux43dux43aux446ux438ux44f}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Двойственная функция}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Двойственная функция в точке \(x^*\) показывает, насколько минимум надо
+опустить прямую \(\langle x, x^* \rangle\) вниз, чтобы она целиком
+оказалась ниже функции \(f(x)\).
+
+\[
+f^*(x^*) = \inf_t \{t \mid \langle x, x^* \rangle - t \leq f(x), \text{ для любого } x\}
+\]
+
+\end{tcolorbox}
+
+Заметим, что определение легко переформулировать как поиск максимальной
+разницы от функции \(f(x)\) вверх до прямой \(\langle x, x^* \rangle\).
+Если в какой-то точке \(x\) прямая \(\langle x, x^* \rangle\) лежит
+очень высоко относительно функции \(f(x)\), то и минимальная величина,
+на которую придется опустить прямую очень велика.
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Двойственная функция}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Двойственная функция в точке \(x^*\) показывает, насколько минимум надо
+опустить прямую \(\langle x, x^* \rangle\) вниз, чтобы она целиком
+оказалась ниже функции \(f(x)\).
+
+\[
+f^*(x^*) = \sup_x \{\langle x, x^* \rangle - f(x)\}
+\]
+
+\end{tcolorbox}
+
+Конечно, двойственная функция может принимать особое значение
+\(\infty\).
+
+Примеры.
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+\[
+f^{**}(x) \leq f(x)
+\]
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Доказательство неравенства}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Для доказательства теоремы предположим, что \(f(x) \leq a\), и докажем,
+что в этом случае \(f^{**}(x) \leq a\).
+
+На старт: \[
+f(x) \leq a
+\]
+
+Превратим левую и правую часть во что-то похожее на определение
+двойственной функции, рассмотрев произвольные угловые коэффициенты
+\(x^*\). \[
+\langle x, x^* \rangle - f(x) \geq \langle x, x^* \rangle - a
+\]
+
+Левая часть не упадёт, если мы в ней вместо конкретного \(x\) возьмём
+супремум: \[
+\sup_{w}\langle w, x^* \rangle - f(w) \geq \langle x, x^* \rangle - a
+\]
+
+Это в чистом виде определение \(f^*(x^*)\): \[
+f^*(x^*) \geq \langle x, x^* \rangle - a
+\] Вспомним, что вектор наклонов \(x^*\) был произвольным!
+
+Получается, что для любого вектора \(x^*\): \[
+a \geq \langle x, x^* \rangle - f^*(x^*)
+\]
+
+Если \(a\) выше каждого возможного значения правой части, то \(a\) выше
+максимально возможного. \[
+a \geq \sup_{x^*}\{\langle x, x^* \rangle - f^*(x^*)\}
+\]
+
+А это и есть искомое утверждение: \[
+a \geq f^{**}(x).
+\]
+
+\end{tcolorbox}
+
+Для хороших выпуклых функций, оказывается, что \(f(x)=f^{**}(x)\).
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Если \ldots., то \[
+f^{**}(x) = f(x)
+\]
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Доказательство случая равенства}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+В доказательстве теоремки о неравенстве есть только один неравносильный
+переход. Обратим на него внимание.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Правильное определение двойственной задачи}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Рассмотрим задачу поиска минимума функции \(\phi\) по \(x\) с параметром
+\(y\). \[
+\min_x \phi(x, y)
+\] Параметр \(y\) мы воспринимаем как возмущение, отклонение задачи от
+некоторой исходной.
+
+Исходная задача без возмущения имеет вид: \[
+\min_x \phi(x, 0)
+\]
+
+Двойственной задачей назовём задачу: \[
+\min_{y^*} \phi^*(0, y^*)
+\]
+
+\end{tcolorbox}
+
+Определим функцию \(h(y)\) как оптимум исходной задачи про возмущении
+\(y\), \[
+h(y) = \min_x \phi(x, y)
+\]
+
+В этом случае исходную задачу без возмущения можно представить как
+вычисление \(h(0)\).
+
+\ldots{}
+
+Таким образом, двойственная задача --- это вычисление \(h^{**}(0)\).
+
+Помимо ещё одной абстрактной формулировки:
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Правильное определение двойственной задачи}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Рассмотрим задачу поиска минимума функции \(\phi\) по \(x\) с параметром
+\(y\). \[
+h(y) = \min_x \phi(x, y)
+\]
+
+Прямая задача --- это поиск \(h(0)\).
+
+Двойственная задача --- это поиск \(h^{**}(0)\).
+
+\end{tcolorbox}
+
+Вспомним, что \(h^{**}(x) \leq h(x)\) для всех функций и
+\(h^{**}(x) = h(x)\) для хороших \ldots{} функций.
+
+Следовательно, мы бесплатно получаем две теоремки:
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Если \(h(y) = \min_x \phi(x, y)\) --- оптимум возмущённой задачи, то \[
+h^{**}(0) = \min_{y^*} \phi^*(0, y^*) \leq \min_x \phi(x, 0) = h(0).
+\]
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, breakable, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Теоремка}, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, colback=white, titlerule=0mm, rightrule=.15mm, arc=.35mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, bottomrule=.15mm, left=2mm]
+
+Если \(h(y) = \min_x \phi(x, y)\) --- оптимум возмущённой задачи, и
+\ldots, то \[
+h^{**}(0) = \min_{y^*} \phi^*(0, y^*) = \min_x \phi(x, 0) = h(0).
+\]
+
+\end{tcolorbox}
+
+Источники:
+
+
+
+\end{document}

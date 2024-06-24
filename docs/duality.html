@@ -191,7 +191,7 @@ a \geq \langle x, x^* \rangle - f^*(x^*)
 a \geq \sup_{x^*}\{\langle x, x^* \rangle - f^*(x^*)\}
 \]</span></p>
 <p>А это и есть искомое утверждение: <span class="math display">\[
-a \geq f^**(x).
+a \geq f^{**}(x).
 \]</span></p>
 </div>
 </div>
@@ -228,6 +228,84 @@ f^{**}(x) = f(x)
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Правильное определение двойственной задачи
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Рассмотрим задачу поиска минимума функции <span class="math inline">\(\phi\)</span> по <span class="math inline">\(x\)</span> с параметром <span class="math inline">\(y\)</span>. <span class="math display">\[
+\min_x \phi(x, y)
+\]</span> Параметр <span class="math inline">\(y\)</span> мы воспринимаем как возмущение, отклонение задачи от некоторой исходной.</p>
+<p>Исходная задача без возмущения имеет вид: <span class="math display">\[
+\min_x \phi(x, 0)
+\]</span></p>
+<p>Двойственной задачей назовём задачу: <span class="math display">\[
+\min_{y^*} \phi^*(0, y^*)
+\]</span></p>
+</div>
+</div>
+<p>Определим функцию <span class="math inline">\(h(y)\)</span> как оптимум исходной задачи про возмущении <span class="math inline">\(y\)</span>, <span class="math display">\[
+h(y) = \min_x \phi(x, y)
+\]</span></p>
+<p>В этом случае исходную задачу без возмущения можно представить как вычисление <span class="math inline">\(h(0)\)</span>.</p>
+<p>…</p>
+<p>Таким образом, двойственная задача — это вычисление <span class="math inline">\(h^{**}(0)\)</span>.</p>
+<p>Помимо ещё одной абстрактной формулировки:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Правильное определение двойственной задачи
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Рассмотрим задачу поиска минимума функции <span class="math inline">\(\phi\)</span> по <span class="math inline">\(x\)</span> с параметром <span class="math inline">\(y\)</span>. <span class="math display">\[
+h(y) = \min_x \phi(x, y)
+\]</span></p>
+<p>Прямая задача — это поиск <span class="math inline">\(h(0)\)</span>.</p>
+<p>Двойственная задача — это поиск <span class="math inline">\(h^{**}(0)\)</span>.</p>
+</div>
+</div>
+<p>Вспомним, что <span class="math inline">\(h^{**}(x) \leq h(x)\)</span> для всех функций и <span class="math inline">\(h^{**}(x) = h(x)\)</span> для хороших … функций.</p>
+<p>Следовательно, мы бесплатно получаем две теоремки:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Теоремка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если <span class="math inline">\(h(y) = \min_x \phi(x, y)\)</span> — оптимум возмущённой задачи, то <span class="math display">\[
+h^{**}(0) = \min_{y^*} \phi^*(0, y^*) \leq \min_x \phi(x, 0) = h(0).
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Теоремка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если <span class="math inline">\(h(y) = \min_x \phi(x, y)\)</span> — оптимум возмущённой задачи, и …, то <span class="math display">\[
+h^{**}(0) = \min_{y^*} \phi^*(0, y^*) = \min_x \phi(x, 0) = h(0).
+\]</span></p>
+</div>
+</div>
+<p>Источники:</p>
 </section>
 
 </main>
