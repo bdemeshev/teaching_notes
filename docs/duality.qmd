@@ -1,8 +1,186 @@
 ---
 title: "Двойственность"
-author: "Винни Пух"
-format: html
+lang: ru
+language: 
+  ru:
+    section-title-references: ""
+pdf-engine: xelatex
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    include-in-header:
+      text: |
+        $$
+        \newcommand{\cN}{\mathcal{N}}
+        \DeclareMathOperator{\P}{\mathbb{P}}
+        \DeclareMathOperator{\E}{\mathbb{E}}
+        \DeclareMathOperator{\Var}{Var}
+        \DeclareMathOperator{\Cov}{Cov}
+        \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+        $$
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    keep-tex: true
+    include-in-header: 
+      text: |
+        \usepackage{mathtools}
+        \newcommand{\cN}{\mathcal{N}}
+
+        \let\P\relax
+        \DeclareMathOperator{\P}{\mathbb{P}}
+        \DeclareMathOperator{\E}{\mathbb{E}}
+        \DeclareMathOperator{\plim}{plim}
+        \DeclareMathOperator{\Var}{Var}
+        \DeclareMathOperator{\Cov}{Cov}
+        \DeclareMathOperator{\Corr}{Corr}
+        
+        \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+        \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+        \DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+        % TODO: automatic scaling does not work in pdf???
+        
+        % TODO: no cyrillic font in section titles!
+        \setmainfont{Linux Libertine}
+        
+        %\newfontfamily{\cyrillicfont}{Linux Libertine}
+        %\newfontfamily{\cyrillicfonttt}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontsf}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontrm}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontbf}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontmd}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontit}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontsl}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontsc}{Linux Libertine}
+        %\newfontfamily{\cyrillicfontup}{Linux Libertine}
+bibliography: references.bib
+editor_options: 
+  chunk_output_type: console
+  markdown: 
+    wrap: 72
 ---
 
+::: {.content-hidden}
+\newcommand{\cN}{\mathcal{N}}
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\scalp}[1]{\langle #1 \rangle}
+:::
+
+
 # Двойственная функция
+
+::: {.callout-note}
+## Двойственная функция 
+
+Двойственная функция в точке $x^*$ показывает, насколько минимум надо опустить 
+прямую $\scalp{x, x^*}$ вниз, чтобы она целиком оказалась ниже функции $f(x)$. 
+
+$$
+f^*(x^*) = \inf_t \{t \mid \scalp{x, x^*} - t \leq f(x), \text{ для любого } x\}
+$$
+:::
+
+Заметим, что определение легко переформулировать как поиск максимальной разницы от функции $f(x)$ вверх до прямой $\scalp{x, x^*}$.
+Если в какой-то точке $x$ прямая $\scalp{x, x^*}$ лежит очень высоко относительно функции $f(x)$, то и минимальная величина, на которую придется опустить прямую очень велика. 
+
+::: {.callout-note}
+## Двойственная функция 
+
+Двойственная функция в точке $x^*$ показывает, насколько минимум надо опустить 
+прямую $\scalp{x, x^*}$ вниз, чтобы она целиком оказалась ниже функции $f(x)$. 
+
+$$
+f^*(x^*) = \sup_x \{\scalp{x, x^*} - f(x)\}
+$$
+:::
+
+Конечно, двойственная функция может принимать особое значение $\infty$. 
+
+Примеры.
+
+
+::: {.callout-note}
+## Теоремка 
+
+$$
+f^{**}(x) \leq f(x)
+$$
+:::
+
+
+::: {.callout-warning collapse="true"}
+## Доказательство неравенства
+
+Для доказательства теоремы предположим, что $f(x) \leq a$, 
+и докажем, что в этом случае $f^{**}(x) \leq a$. 
+
+На старт:
+$$
+f(x) \leq a
+$$
+
+Превратим левую и правую часть во что-то похожее на определение двойственной функции,
+рассмотрев произвольные угловые коэффициенты $x^*$. 
+$$
+\scalp{x, x^*} - f(x) \geq \scalp{x, x^*} - a
+$$
+
+
+Левая часть не упадёт, если мы в ней вместо конкретного $x$ возьмём супремум:
+$$
+\sup_{w}\scalp{w, x^*} - f(w) \geq \scalp{x, x^*} - a
+$$
+
+Это в чистом виде определение $f^*(x^*)$:
+$$
+f^*(x^*) \geq \scalp{x, x^*} - a
+$$
+Вспомним, что вектор наклонов $x^*$ был произвольным!
+
+Получается, что для любого вектора $x^*$:
+$$
+a \geq \scalp{x, x^*} - f^*(x^*)
+$$
+
+Если $a$ выше каждого возможного значения правой части, то $a$ выше максимально возможного. 
+$$
+a \geq \sup_{x^*}\{\scalp{x, x^*} - f^*(x^*)\}
+$$
+
+А это и есть искомое утверждение:
+$$
+a \geq f^{**}(x).
+$$
+:::
+
+
+Для хороших выпуклых функций, оказывается, что $f(x)=f^{**}(x)$.
+
+::: {.callout-note}
+## Теоремка 
+Если ...., то
+$$
+f^{**}(x) = f(x)
+$$
+:::
+
+
+::: {.callout-warning collapse="true"}
+## Доказательство случая равенства
+
+В доказательстве теоремки о неравенстве есть только один неравносильный переход. 
+Обратим на него внимание. 
+
+:::
+
+
+
+Источники:
 
